@@ -1,0 +1,24 @@
+{% extends "Base.html" %} {% block content %}
+
+<section class="contact-section" id="contact">
+  <h2 class="section-title">Search result : {{query}} </h2>
+  <h2 class="text-center"> Total found : {{total_result}}</h2>
+
+  <div class="section-content" style="margin-left: 30%">
+    <ul>
+      {% for blog in results %}
+      <li>
+        Name : {{ blog.name }}
+        <br />
+        Description : {{ blog.description }}
+      </li>
+      {% empty %}
+      <li>No results found.</li>
+      {% endfor %}
+    </ul>
+
+    
+  </div>
+</section>
+
+{% endblock content %}

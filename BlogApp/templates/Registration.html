@@ -1,0 +1,87 @@
+{% extends "Base.html" %}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+{% block title %}Registration{% endblock title %}
+<!-- {% include "Header.html" %} -->
+<style>
+  .contact-form {
+    margin-top: -50px; /* adjust the value as needed */
+  }
+  .contact-form button {
+    margin-left: 150px;
+  }
+  .contact-section h2 {
+    margin-top: 10px;
+  }
+  .password-field {
+    position: relative; /* Positioning context for the icon */
+  }
+  .password-field .form-input {
+    padding-right: 30px; /* Space for the icon */
+  }
+  .password-field .field-icon {
+    position: absolute;
+    top: 38%;
+    right: 15px; /* Distance from the right edge */
+    transform: translateY(-50%); /* Center vertically */
+    cursor: pointer; /* Pointer cursor on hover */
+  }
+  </style>
+
+  {% block content %}
+  
+<section class="contact-section" id="contact">
+    <h2 class="section-title">Registration</h2>
+    <div class="section-content" style="margin-left: 30%;margin-top: -5%;">     
+          <form action="#" class="contact-form" method="POST">
+
+            {% csrf_token %}
+
+            {% if messages %}
+            <div class="alert alert-primary" role="alert">
+                {% for message in messages %}
+                {{ message }}
+                {% endfor %}
+            </div>
+            {% endif %}
+            <input type="text" name="firstname" placeholder="First name" class="form-input" required />
+            <input type="text" name="lastname" placeholder="Last name" class="form-input" required />
+            <input type="text" name="username" placeholder="Username" class="form-input" required />
+            <input type="email" name="email" placeholder="your email" class="form-input" required />
+            <div class="password-field">
+              <input type="password" name="password" placeholder="Password" class="form-input" required />
+              <span class="fa fa-eye field-icon toggle-password"></span>
+            </div>
+            
+            <!-- <textarea placeholder="Your message" class="form-input" required></textarea> -->
+            <button type="submit" class="button submit-button">Submit</button>
+          </form>
+     
+      </div>
+  </section>
+  
+  {% endblock content %}
+<!-- {% include "Footer.html" %} -->
+
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const togglePassword = document.querySelector('.toggle-password');
+    const passwordInput = document.querySelector('input[name="password"]');
+  
+    if (togglePassword && passwordInput) {
+      togglePassword.addEventListener('click', function () {
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+  
+        // Toggle the eye icon
+        this.classList.toggle('fa-eye');
+        this.classList.toggle('fa-eye-slash');
+      });
+    } else {
+      console.error('Password toggle element or input not found');
+    }
+  });
+  
+</script>

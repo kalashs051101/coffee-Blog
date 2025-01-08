@@ -1,0 +1,94 @@
+{% extends "Base.html" %}
+{% load socialaccount %}
+
+{% block title %}Login{% endblock title %}
+<!-- {% include "Header.html" %} -->
+<style>
+  .contact-form {
+    margin-top: -50px;
+    /* adjust the value as needed */
+  }
+
+  .contact-form button {
+    margin-left: 100px;
+  }
+
+  .contact-section h2 {
+    margin-top: 5px;
+  }
+
+  .password-field {
+    position: relative;
+    /* Positioning context for the icon */
+  }
+
+  .password-field .form-input {
+    padding-right: 20px;
+    /* Space for the icon */
+  }
+
+  .password-field .field-icon {
+    position: absolute;
+    top: 38%;
+    right: 15px;
+    /* Distance from the right edge */
+    transform: translateY(-50%);
+    /* Center vertically */
+    cursor: pointer;
+    /* Pointer cursor on hover */
+  }
+</style>
+
+{% block content %}
+
+<section class="contact-section" id="contact">
+  <h2 class="section-title" style="margin-right: 80px;">Login Page</h2>
+  <div class="section-content" style="margin-left: 30%" style="margin-top: -10%;">
+    <form action="#" class="contact-form" method="POST">
+      {% csrf_token %}
+      {% if messages %}
+      <div class="alert alert-primary" role="alert">
+        {% for message in messages %} {{ message }} {% endfor %}
+      </div>
+      {% endif %}
+      <input type="text" name="username" placeholder="Your Username" class="form-input" required />
+
+      <input type="email" , name="email" placeholder="Your email" class="form-input" required />
+      <div class="password-field">
+        <input type="password" name="password" placeholder="Password" class="form-input" required />
+        <div style="margin-top: 10px;">
+          <a href="{% url 'Registration' %}" class="button">Register</a>
+        </div>
+        <div style="margin-left: 200px; margin-top: -25px;">
+          <a href="{% url 'forgot_password' %}" class="button">forgot password?</a>
+        </div>
+        <button type="submit" class="button submit-button">Login</button>
+        <br>
+        or
+        <hr>
+
+        <a href="/accounts/login/">Sign in with Google</a>
+        
+    </form>
+    
+  </div>
+</section>
+
+{% endblock content %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const togglePassword = document.querySelector('.toggle-password');
+    const passwordInput = document.querySelector('input[name="password"]');
+
+    togglePassword.addEventListener('click', function () {
+      // Toggle the type attribute
+      const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordInput.setAttribute('type', type);
+
+      // Toggle the eye icon
+      this.classList.toggle('fa-eye');
+      this.classList.toggle('fa-eye-slash');
+    });
+  });
+</script>

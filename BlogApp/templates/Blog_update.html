@@ -1,0 +1,45 @@
+{% extends "Base.html" %} 
+{% block title %}Blog Update{% endblock title %} 
+
+
+{% block content %}
+
+<section class="contact-section" id="contact">
+  <h2 class="section-title">Update Blog :{{obj.name}}</h2>
+  <div class="section-content" style="margin-left: 30%">
+    <form
+      action="#"
+      class="contact-form"
+      method="POST"
+      enctype="multipart/form-data"
+    >
+      {% csrf_token %} {% if messages %}
+      <div class="alert alert-primary" role="alert">
+        {% for message in messages %} {{ message }} {% endfor %}
+      </div>
+      {% endif %}
+      <input
+        type="text"
+        name="blogname"
+        placeholder="Enter your Blog Name"
+        class="form-input"
+        value="{{obj.name}}"
+        required
+      />
+      <textarea
+        placeholder="Your Description"
+        name="description"
+        class="form-input"
+        value="{{obj.description}}"
+        required
+      ></textarea>
+      <input type="file" name="file" class="form-input mt-1" required />
+
+      
+
+      <button type="submit" class="button submit-button">Update</button>
+    </form>
+  </div>
+</section>
+
+{% endblock content %}
